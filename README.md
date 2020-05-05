@@ -1,2 +1,2 @@
-# 553.738_final
+# README
 High-Dimensional Approximation, Probability, and Statistical Learning Final Project
