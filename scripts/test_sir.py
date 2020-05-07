@@ -13,9 +13,9 @@ I0, R0 = 0.1, 0.1
 S0 = N - I0 - R0
 # Contact rate, beta, and mean recovery rate, gamma, (in 1/days).
 # zeta = exponential decay rate for immunity
-beta, gamma, zeta = 0.5, 0.1, 0.01
+beta, gamma, zeta = 0.5, 0.2, 0.01
 # A grid of time points (in days)
-t = np.linspace(0, 160, 160)
+t = np.linspace(0, 640, 640)
 
 # The SIR model differential equations.
 def deriv(y, t, N, beta, gamma, zeta):
@@ -28,15 +28,15 @@ def deriv(y, t, N, beta, gamma, zeta):
 # Initial conditions vector
 y0 = S0, I0, R0
 # Integrate the SIR equations over the time grid, t.
-ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+ret = odeint(deriv, y0, t, args=(N, beta, gamma, zeta))
 S, I, R = ret.T
 
 # Plot the data on three separate curves for S(t), I(t) and R(t)
 fig = plt.figure(facecolor='w')
 ax = fig.add_subplot(111, facecolor='#dddddd', axisbelow=True)
-ax.plot(t, S/1000, 'b', alpha=0.5, lw=2, label='Susceptible')
-ax.plot(t, I/1000, 'r', alpha=0.5, lw=2, label='Infected')
-ax.plot(t, R/1000, 'g', alpha=0.5, lw=2, label='Recovered with immunity')
+ax.plot(t, S, 'b', alpha=0.5, lw=2, label='Susceptible')
+ax.plot(t, I, 'r', alpha=0.5, lw=2, label='Infected')
+ax.plot(t, R, 'g', alpha=0.5, lw=2, label='Recovered with immunity')
 
 
 ax.set_xlabel('Time /days')
